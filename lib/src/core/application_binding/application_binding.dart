@@ -14,8 +14,6 @@ class ApplicationBinding extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: ((context) => AuthController())),
         ChangeNotifierProvider(create: ((context) => RegisterController())),
-        /* ChangeNotifierProvider(create: ((context) => HomeController())),
-        Provider(create: ((context) => GlobalUser())) */
       ],
       child: child,
     );

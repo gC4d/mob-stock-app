@@ -10,49 +10,42 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration:
-                BoxDecoration(color: Theme.of(context).colorScheme.primary),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 200,
-                  width: 200,
-                  color: Theme.of(context).colorScheme.secondary,
-                  child: Text('Logo'),
-                ),
-                SizedBox(
-                  height: context.percentHeight(.2),
-                ),
-                const TitleWidget(label: "Bem vindo ao"),
-                const TitleWidget(label: "MobileStorage"),
-                SizedBox(
-                  height: context.percentHeight(.03),
-                ),
-                PrimaryButton(
-                  label: "Login",
-                  width: context.percentWidth(.7),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/auth');
-                  },
-                ),
-                SecundaryButton(
-                  elevation: 0,
-                  width: context.percentWidth(.7),
-                  label: "Cadastrar",
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/register');
-                  },
-                )
-              ],
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 200,
+              width: 200,
+              color: Theme.of(context).colorScheme.secondary,
+              child: Text('Logo'),
             ),
-          )
-        ],
+            SizedBox(
+              height: context.percentHeight(.2),
+            ),
+            const TitleWidget(label: "Bem vindo ao"),
+            const TitleWidget(label: "MobileStorage"),
+            SizedBox(
+              height: context.percentHeight(.03),
+            ),
+            PrimaryButton(
+              label: "Login",
+              width: context.percentWidth(.7),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/auth');
+              },
+            ),
+            SecundaryButton(
+              elevation: 0,
+              width: context.percentWidth(.7),
+              label: "Cadastrar",
+              onPressed: () {
+                Navigator.of(context).pushNamed('/register');
+              },
+            )
+          ],
+        ),
       ),
     );
   }

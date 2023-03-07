@@ -7,11 +7,12 @@ import 'package:mob_storage_app/src/core/services/client/rest_client.dart';
 import 'package:mob_storage_app/src/feature/register/register_user_dto.dart';
 import 'package:mob_storage_app/src/feature/register/repository/register_repository.dart';
 import '/src/core/exceptions/auth_exception.dart';
-enum RegisterState { idle, loading, success, error, stopped }
 
-class RegisterController extends ChangeNotifier implements RegisterRepository {
+enum RegisterState { idle, loading, success, error}
+
+class RegisterController extends ChangeNotifier{
   RestClient client = RestClient();
-  RegisterState state = RegisterState.idle;
+  var state = RegisterState.idle;
 
   RegisterUserDto user = RegisterUserDto(
     name: "",
@@ -20,11 +21,11 @@ class RegisterController extends ChangeNotifier implements RegisterRepository {
   );
   String confirmPassword = '';
 
-  @override
+  
   Future<void> registerAction() async {
     state = RegisterState.loading;
     notifyListeners();
-    if (user.password == confirmPassword) {
+    if (user.password == confirmPassword && user.email != "") {
       try {
         await client.unauth().post('/user/register', data: user.toJson());
         state = RegisterState.success;
@@ -36,8 +37,9 @@ class RegisterController extends ChangeNotifier implements RegisterRepository {
         throw AuthException(message: "Erro ao cadastrar usuário");
       }
     } else {
-      RegisterState state = RegisterState.stopped;
+      state = RegisterState.error;
       notifyListeners();
+      log('$state');
     }
   }
 }

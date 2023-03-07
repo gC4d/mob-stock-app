@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 part 'color_schemes.g.dart';
 
+Color get authModal => ThemeMode == ThemeMode.dark
+    ? const Color(0xFF41474D)
+    : const Color(0xFF8B9198);
+
 ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
     colorScheme: _lightColorScheme,
@@ -13,10 +17,10 @@ ThemeData get lightTheme => ThemeData(
       backgroundColor: _lightColorScheme.primary,
       foregroundColor: _lightColorScheme.onPrimary,
     ),
-    elevatedButtonTheme: _elevatedButtonTheme
+    elevatedButtonTheme: _elevatedButtonTheme,
     );
 
-ThemeData get darkTheme => ThemeData( 
+ThemeData get darkTheme => ThemeData(
       useMaterial3: true,
       colorScheme: _darkColorScheme,
       appBarTheme: AppBarTheme(
@@ -24,12 +28,19 @@ ThemeData get darkTheme => ThemeData(
         backgroundColor: _darkColorScheme.primaryContainer,
       ),
       elevatedButtonTheme: _elevatedButtonTheme,
+      inputDecorationTheme: _inputDecorationTheme,
     );
 
 ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
-        )
+          shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
+    );
+
+InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
     );
+
+

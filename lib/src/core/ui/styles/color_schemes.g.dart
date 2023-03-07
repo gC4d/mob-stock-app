@@ -67,3 +67,10 @@ const _lightColorScheme = ColorScheme(
   outlineVariant: Color(0xFF41474D),
   scrim: Color(0xFF000000),
 );
+
+const _authModalDark = Color(0xFF41474D);
+const _onAuthModalDark = Colors.white54;
+const _titleAuthDark = Colors.white54;
+
+const _authModalLight = Color(0xFF41474D);
+const _onAuthModalLight = Color(0xFF8B9198);

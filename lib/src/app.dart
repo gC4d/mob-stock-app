@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mob_storage_app/src/core/application_binding/application_binding.dart';
 import 'package:mob_storage_app/src/core/ui/styles/themes.dart';
 
+import 'feature/auth/auth_page.dart';
 import 'feature/home/home_page.dart';
+import 'feature/register/register_page.dart';
 import 'feature/splash/splash_page.dart';
 
 class App extends StatelessWidget {
@@ -11,15 +12,19 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/splash');
 
     return ApplicationBinding(
-      child: MaterialApp.router(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         darkTheme: darkTheme,
-        routerDelegate: Modular.routerDelegate,
-        routeInformationParser: Modular.routeInformationParser,
+        initialRoute: '/splash',
+        routes: {
+          '/splash': (context) => SplashPage(),
+          '/': (context) => HomePage(),
+          '/register': (context) => RegisterPage(),
+          '/auth': (context) => AuthPage(),
+        },
       ),
     );
   }
