@@ -4,13 +4,26 @@ import 'package:mob_storage_app/src/core/ui/widgets/primary_button.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/secundary_button.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/title_widget.dart';
 
-class SplashPage extends StatelessWidget {
+import '../../core/ui/base_state/base_state.dart';
+
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends BaseState<SplashPage> {
+
+  @override
+  void onReady() {
+    super.onReady();
+    
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -18,7 +31,7 @@ class SplashPage extends StatelessWidget {
             Container(
               height: 200,
               width: 200,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.onSecondary,
               child: Text('Logo'),
             ),
             SizedBox(

@@ -20,10 +20,10 @@ class App extends StatelessWidget {
         darkTheme: darkTheme,
         initialRoute: '/splash',
         routes: {
-          '/splash': (context) => SplashPage(),
-          '/': (context) => HomePage(),
-          '/register': (context) => RegisterPage(),
-          '/auth': (context) => AuthPage(),
+          '/splash': (context) => const SplashPage(),
+          '/': (context) => const HomePage(),
+          '/register': (context) => const RegisterPage(),
+          '/auth': (context) => const AuthPage(),
         },
       ),
     );

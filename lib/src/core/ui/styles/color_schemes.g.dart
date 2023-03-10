@@ -1,6 +1,6 @@
 part of 'themes.dart';
 
-const _darkColorScheme = ColorScheme(
+const _lightColorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFF006494),
   onPrimary: Color(0xFFFFFFFF),
@@ -34,7 +34,7 @@ const _darkColorScheme = ColorScheme(
   scrim: Color(0xFF000000),
 );
 
-const _lightColorScheme = ColorScheme(
+const _darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
   primary: Color(0xFF8ECDFF),
   onPrimary: Color(0xFF00344F),

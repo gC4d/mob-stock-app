@@ -5,7 +5,6 @@ import 'package:mob_storage_app/src/core/ui/styles/themes.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/custom_input_TextField.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/primary_button.dart';
 import 'package:mob_storage_app/src/feature/register/register_controller.dart';
-import 'package:mob_storage_app/src/feature/register/repository/register_repository.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
 
@@ -41,6 +40,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: Column(
           children: [

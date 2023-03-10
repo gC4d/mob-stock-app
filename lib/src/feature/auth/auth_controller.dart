@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum AuthState { idle, loading, success, error }
 
 class AuthController extends ChangeNotifier implements AuthRepository {
-  AuthDto authdto = AuthDto(email: '', password: '');
+  AuthDto auth = AuthDto(email: '', password: '');
   RestClient client = RestClient();
   AuthState state = AuthState.idle;
 
@@ -19,9 +19,10 @@ class AuthController extends ChangeNotifier implements AuthRepository {
   Future<void> loginAction() async {
     state = AuthState.loading;
     notifyListeners();
+    if(auth.email != "" && auth.password != ""){
     final shared = await SharedPreferences.getInstance();
     try {
-       final respose = await client.unauth().post('/user/auth', data: authdto.toJson());
+       final respose = await client.unauth().post('/user/auth', data: auth.toJson());
        await shared.setString('UserLogged', respose.toString());
        state = AuthState.success;
        notifyListeners();
@@ -30,6 +31,11 @@ class AuthController extends ChangeNotifier implements AuthRepository {
       state = AuthState.error;
       notifyListeners();
       throw AuthException(message: 'Erro ao logar usuário');
+    }
+    } else {
+      log("Erro ao logar usuário: Email ou senha incorretos");
+      state = AuthState.error;
+      notifyListeners();
     }
   }
 }

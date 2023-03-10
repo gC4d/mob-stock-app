@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mob_storage_app/src/core/services/client/rest_client.dart';
 import 'package:mob_storage_app/src/feature/register/register_user_dto.dart';
-import 'package:mob_storage_app/src/feature/register/repository/register_repository.dart';
 import '/src/core/exceptions/auth_exception.dart';
 
 enum RegisterState { idle, loading, success, error}

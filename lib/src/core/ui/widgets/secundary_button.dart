@@ -23,7 +23,7 @@ class SecundaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-                Theme.of(context).colorScheme.primary),
+                Theme.of(context).colorScheme.onPrimary),
             elevation: MaterialStateProperty.all(elevation)),
         onPressed: onPressed,
         child: Text(
@@ -31,7 +31,7 @@ class SecundaryButton extends StatelessWidget {
           style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onPrimary),
+              color: Theme.of(context).colorScheme.primary),
         ),
       ),
     );
