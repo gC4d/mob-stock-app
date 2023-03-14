@@ -12,12 +12,16 @@ class CustomDrawer extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 28, 16, 16),
           child: Text(
             'Opções',
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
         const NavigationDrawerDestination(
           icon: Icon(Icons.storage_rounded),
           label: Text('Estoques'),
+        ),
+        const NavigationDrawerDestination(
+          icon: Icon(Icons.shopping_cart_outlined),
+          label: Text('Produtos'),
         ),
         const NavigationDrawerDestination(
           icon: Icon(Icons.settings),

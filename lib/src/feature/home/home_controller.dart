@@ -1,37 +1,15 @@
-import 'dart:convert';
-import 'dart:developer';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bloc/bloc.dart';
 
-enum HomeState { idle, loading, success, error }
+import 'package:mob_storage_app/src/core/models/user_model.dart';
+import 'package:mob_storage_app/src/feature/home/home_state.dart';
 
-enum UserState { logged, notLogged }
+class HomeController extends Cubit<HomeState> {
+  final UserModel _user;
 
-class HomeController extends ChangeNotifier {
-  var userState = UserState.notLogged;
-  var state = HomeState.idle;
-
-  Future<void> checkForUserIsLogged() async {
-    state = HomeState.loading;
-    notifyListeners();
-    final shared = await SharedPreferences.getInstance();
-    try {
-      var sharedData = jsonDecode(shared.getString('UserLogged').toString());
-      log(sharedData);
-      if (sharedData != null) {
-        userState = UserState.logged;
-        state = HomeState.success;
-        notifyListeners();
-      } else {
-        userState = UserState.notLogged;
-        state = HomeState.success;
-        notifyListeners();
-      }
-    } catch (e, s) {
-      log("Erro ao verificar se usuário está logado", error: e, stackTrace: s);
-      state = HomeState.error;
-      notifyListeners();
-    }
-  }
+  HomeController(
+    this._user,
+  ) : super(const HomeState.initial());
+  
 }
