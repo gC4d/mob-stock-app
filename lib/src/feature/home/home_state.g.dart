@@ -11,7 +11,8 @@ extension HomeStateStatusMatch on HomeStateStatus {
       {required T Function() initial,
       required T Function() loading,
       required T Function() success,
-      required T Function() error}) {
+      required T Function() error,
+      required T Function() notLogged}) {
     final v = this;
     if (v == HomeStateStatus.initial) {
       return initial();
@@ -29,6 +30,10 @@ extension HomeStateStatusMatch on HomeStateStatus {
       return error();
     }
 
+    if (v == HomeStateStatus.notLogged) {
+      return notLogged();
+    }
+
     throw Exception('HomeStateStatus.match failed, found no match for: $this');
   }
 
@@ -37,7 +42,8 @@ extension HomeStateStatusMatch on HomeStateStatus {
       T Function()? initial,
       T Function()? loading,
       T Function()? success,
-      T Function()? error}) {
+      T Function()? error,
+      T Function()? notLogged}) {
     final v = this;
     if (v == HomeStateStatus.initial && initial != null) {
       return initial();
@@ -53,6 +59,10 @@ extension HomeStateStatusMatch on HomeStateStatus {
 
     if (v == HomeStateStatus.error && error != null) {
       return error();
+    }
+
+    if (v == HomeStateStatus.notLogged && notLogged != null) {
+      return notLogged();
     }
 
     return any();

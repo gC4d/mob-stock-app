@@ -9,6 +9,7 @@ enum HomeStateStatus {
   loading,
   success,
   error,
+  notLogged,
 }
 
 class HomeState extends Equatable {
@@ -23,7 +24,7 @@ class HomeState extends Equatable {
   });
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [status, isLogged, errorMessage];
 
   const HomeState.initial()
       : status = HomeStateStatus.initial,

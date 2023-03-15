@@ -1,14 +1,26 @@
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter/material.dart';
+import 'package:mob_storage_app/src/feature/home/home_controller.dart';
 import 'package:mob_storage_app/src/feature/home/home_page.dart';
+import 'package:provider/provider.dart';
 
-class HomeRouter extends Module {
+import '../../core/repositories/user/user_repository.dart';
+import '../../core/repositories/user/user_repository_impl.dart';
 
-   @override
-   List<Bind> get binds => [];
+class HomeRouter {
+  HomeRouter._();
 
-   @override
-   List<ModularRoute> get routes => [
-    ChildRoute('/', child: (context, args) => const HomePage())
-   ];
-
+  static Widget get page => MultiProvider(
+        providers: [
+          Provider<UserRepository>(
+            create: (context) => UserRepositoryImpl(),
+          ),
+          Provider(
+            create: (context) => HomeController(
+              context.read(),
+            ),
+          ),
+        ],
+        child: const HomePage(),
+      );
 }
