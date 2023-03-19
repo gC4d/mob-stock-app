@@ -28,7 +28,6 @@ ThemeData get darkTheme => ThemeData(
         backgroundColor: _darkColorScheme.primaryContainer,
       ),
       elevatedButtonTheme: _elevatedButtonTheme,
-      inputDecorationTheme: _inputDecorationTheme,
     );
 
 ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
@@ -37,10 +36,6 @@ ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
     );
 
-InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
+
 
 

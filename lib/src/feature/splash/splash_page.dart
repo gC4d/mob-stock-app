@@ -49,7 +49,7 @@ class _SplashPageState extends State<SplashPage> {
               width: context.percentWidth(.7),
               label: "Cadastrar",
               onPressed: () {
-                Navigator.of(context).pushNamed('/register');
+                Navigator.of(context).pushNamed('/signup');
               },
             )
           ],

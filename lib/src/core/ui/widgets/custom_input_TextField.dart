@@ -5,15 +5,15 @@ class CustomInputTextfield extends StatelessWidget {
   final String label;
   final Function(String) onChanged;
   final bool obscureText;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   const CustomInputTextfield({
     Key? key,
     required this.label,
     required this.onChanged,
     this.obscureText = false,
-    required this.height,
-    required this.width,
+    this.height,
+    this.width,
     required this.icon,
   }) : super(key: key);
 
@@ -25,7 +25,6 @@ class CustomInputTextfield extends StatelessWidget {
       child: TextField(
         obscureText: obscureText,
         decoration: InputDecoration(
-          fillColor: Theme.of(context).colorScheme.primaryContainer,
           icon: icon,
           hintText: label,
         ),
