@@ -15,7 +15,8 @@ class HomeController extends Cubit<HomeState> {
   Future<void> checkUser() async {
     emit(state.copyWith(status: HomeStateStatus.loading));
     try {
-      bool isLogged = await _userRepository.checkforUserIsLogged();
+      //bool isLogged = await _userRepository.checkforUserIsLogged();
+      bool isLogged = true;
       if (isLogged) {
         emit(
           state.copyWith(

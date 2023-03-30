@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mob_storage_app/src/core/aplication_binding/aplication_binding.dart';
 import 'package:mob_storage_app/src/core/ui/styles/themes.dart';
-import 'package:mob_storage_app/src/feature/signup/sign_up_page.dart';
+import 'package:mob_storage_app/src/feature/auth/auth_router.dart';
 import 'package:mob_storage_app/src/feature/splash/splash_page.dart';
 import 'feature/home/home_router.dart';
 import 'feature/signup/sign_up_router.dart';
@@ -26,7 +26,8 @@ class _AppState extends State<App> {
         routes: {
           '/': (context) => HomeRouter.page,
           '/splash': (context) => const SplashPage(),
-          '/signup': (context) => SignUpRouter.page
+          '/signup': (context) => SignUpRouter.page,
+          '/auth':(context) => AuthRouter.page
         },
       ),
     );

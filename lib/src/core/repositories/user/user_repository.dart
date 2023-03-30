@@ -6,9 +6,9 @@ abstract class UserRepository {
 
   Future<bool> checkforUserIsLogged();
 
-  Future<void> signUpUser(Map<String, dynamic> user);
+  Future<void> signUpUser(Map<String, dynamic> signUpUser);
 
-  Future<Map<String, dynamic>> authUser(Map<String, dynamic> user);
+  Future<void> authUser(Map<String, dynamic> authUserDto);
 
   Future<void> signOutUser();
 }
