@@ -22,7 +22,7 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<bool> checkforUserIsLogged() async {
     box = await Hive.openBox('UserBox');
-    Map<String, dynamic> user = await box.get('User');
+    var user = await box.get('User');
     if (user == null) {
       log("Usuário não logado");
       return false;
@@ -47,14 +47,17 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<void> authUser(Map<String, dynamic> authUserDto) async {
     try {
-      var user = await client.unauth().post("/user/auth", data: authUserDto);
+      Response? user =
+          await client.unauth().get("/user/auth", data: authUserDto);
+
+      //log("user: ${user.data as Map<String, dynamic>}");
       box = await Hive.openBox('UserBox');
-      if (user != null) {
-        await box.put('User', user);
-      } else {
-        throw AuthException(message: "Erro ao logar usuário");
-      }
-    } catch (e, s) {}
+      await box.put('User', user.data);
+      //var tst = await box.get('User');
+      //log("tst: $tst");
+    } catch (e, s) {
+      throw AuthException(message: "Erro ao logar usuário");
+    }
   }
 
   @override

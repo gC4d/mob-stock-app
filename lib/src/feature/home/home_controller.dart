@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/repositories/user/user_repository.dart';
 import 'package:mob_storage_app/src/feature/home/home_state.dart';
@@ -15,8 +13,8 @@ class HomeController extends Cubit<HomeState> {
   Future<void> checkUser() async {
     emit(state.copyWith(status: HomeStateStatus.loading));
     try {
-      //bool isLogged = await _userRepository.checkforUserIsLogged();
-      bool isLogged = true;
+      bool isLogged = await _userRepository.checkforUserIsLogged();
+
       if (isLogged) {
         emit(
           state.copyWith(
@@ -24,14 +22,14 @@ class HomeController extends Cubit<HomeState> {
             isLogged: isLogged,
           ),
         );
-      } /* else {
+      } else {
         emit(
           state.copyWith(
             status: HomeStateStatus.notLogged,
             isLogged: isLogged,
           ),
         );
-      } */
+      } 
     } catch (e, s) {
       log("Erro ao verificar se usuário está logado", error: e, stackTrace: s);
       emit(

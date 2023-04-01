@@ -6,7 +6,7 @@ import '../auth/auth_state.dart';
 
 class AuthController extends Cubit<AuthState> {
   final UserRepository _userRepository;
-  late AuthDto authDto;
+  AuthDto authDto = AuthDto(email: "", password: "");
   AuthController(
     this._userRepository,
   ) : super(const AuthState.initial());
