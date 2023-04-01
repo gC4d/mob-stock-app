@@ -24,14 +24,14 @@ class HomeController extends Cubit<HomeState> {
             isLogged: isLogged,
           ),
         );
-      } else {
+      } /* else {
         emit(
           state.copyWith(
             status: HomeStateStatus.notLogged,
             isLogged: isLogged,
           ),
         );
-      }
+      } */
     } catch (e, s) {
       log("Erro ao verificar se usuário está logado", error: e, stackTrace: s);
       emit(
