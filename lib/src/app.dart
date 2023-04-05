@@ -5,6 +5,7 @@ import 'package:mob_storage_app/src/feature/auth/auth_router.dart';
 import 'package:mob_storage_app/src/feature/splash/splash_page.dart';
 import 'feature/home/home_router.dart';
 import 'feature/signup/sign_up_router.dart';
+import 'feature/storage/stock_router.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -21,13 +22,14 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         darkTheme: darkTheme,
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.system,
         initialRoute: '/',
         routes: {
-          '/': (context) => HomeRouter.page,
           '/splash': (context) => const SplashPage(),
           '/signup': (context) => SignUpRouter.page,
-          '/auth':(context) => AuthRouter.page
+          '/auth':(context) => AuthRouter.page,
+          '/': (context) => HomeRouter.page,
+          '/add/stock': (context) => StockRouter.addPage,
         },
       ),
     );

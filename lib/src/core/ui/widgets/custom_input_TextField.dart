@@ -25,7 +25,14 @@ class CustomInputTextfield extends StatelessWidget {
       child: TextField(
         obscureText: obscureText,
         decoration: InputDecoration(
-          icon: icon,
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(
+              width: 5,
+              color: Colors.grey,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          fillColor: Theme.of(context).colorScheme.primaryContainer,
           hintText: label,
         ),
         onChanged: onChanged,

@@ -14,7 +14,8 @@ class AuthController extends Cubit<AuthState> {
   Future<void> loginAction() async {
     emit(state.copyWith(status: AuthStateStatus.loading));
     try {
-      _userRepository.authUser(authDto.toMap());
+      await _userRepository.authUser(authDto.toMap());
+      
       emit(state.copyWith(status: AuthStateStatus.success));
     } catch (e, s) {
       emit(

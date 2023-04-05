@@ -48,14 +48,11 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> authUser(Map<String, dynamic> authUserDto) async {
     try {
       Response? user =
-          await client.unauth().get("/user/auth", data: authUserDto);
-
-      //log("user: ${user.data as Map<String, dynamic>}");
+          await client.auth().get("/user/auth", data: authUserDto);
       box = await Hive.openBox('UserBox');
       await box.put('User', user.data);
-      //var tst = await box.get('User');
-      //log("tst: $tst");
-    } catch (e, s) {
+    } on DioError catch (e, s) {
+      log("", error:  e, stackTrace:  s);
       throw AuthException(message: "Erro ao logar usuário");
     }
   }
@@ -64,5 +61,17 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> signOutUser() async {
     box = await Hive.openBox('UserBox');
     await box.put('User', null);
+  }
+
+  @override
+  Future<int> getUserid() async {
+    try {
+      box = await Hive.openBox('UserBox');
+      var user = await box.get('User');
+      int id = user["id"];
+      log("tst: ${user["id"]}");
+      return id;
+    } catch (e) {}
+    return 0;
   }
 }

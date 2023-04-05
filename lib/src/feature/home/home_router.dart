@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:mob_storage_app/src/core/repositories/storages/storage_repository.dart';
+import 'package:mob_storage_app/src/core/repositories/storages/storage_repository_impl.dart';
 import 'package:mob_storage_app/src/feature/home/home_controller.dart';
 import 'package:mob_storage_app/src/feature/home/home_page.dart';
 import 'package:provider/provider.dart';
@@ -14,14 +15,20 @@ class HomeRouter {
         providers: [
           Provider<UserRepository>(
             create: (context) => UserRepositoryImpl(
-              client: context.read()
+              client: context.read(),
+            ),
+          ),
+          Provider<StorageRepository>(
+            create: (context) => StorageRepositoryImpl(
+              client: context.read(),
             ),
           ),
           Provider(
             create: (context) => HomeController(
               context.read(),
+              context.read(),
             ),
-          ),
+          )
         ],
         child: const HomePage(),
       );

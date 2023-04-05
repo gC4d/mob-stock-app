@@ -51,6 +51,11 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            actions: [
+              IconButton(onPressed: () {
+                controller.logoutUser();
+              }, icon: const Icon(Icons.logout_outlined))
+            ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -89,6 +94,12 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                 ),
               ],
             ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/add/stock");
+            },
           ),
         );
       },

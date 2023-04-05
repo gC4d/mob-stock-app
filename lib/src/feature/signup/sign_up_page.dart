@@ -24,6 +24,10 @@ class _SignUpPageState extends BaseState<SignUpPage, SignUpController> {
         state.status.matchAny(
             any: () => hideLoader(),
             loading: () => showLoader(),
+            success: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed("/auth");
+            },
             error: () {
               hideLoader();
               showError(state.errorMessage ?? "Erro não informado");

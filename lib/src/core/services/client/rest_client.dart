@@ -7,11 +7,11 @@ import 'package:mob_storage_app/src/core/configuration/env/env.dart';
 
 class RestClient extends DioForNative {
   RestClient()
-      : super(
-          BaseOptions(
-            baseUrl: Env.i['base_url'] ?? '',
-          ),
-        ) {
+      : super(BaseOptions(
+          baseUrl: Env.i['base_url'] ?? '',
+          connectTimeout: const Duration(seconds: 1),
+          receiveTimeout: const Duration(seconds: 1),
+        )) {
     interceptors.add(
       LogInterceptor(
         requestBody: true,

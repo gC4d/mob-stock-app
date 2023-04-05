@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:mob_storage_app/src/core/models/storage_model.dart';
 
 import './storage_repository.dart';
 import 'package:mob_storage_app/src/core/services/client/rest_client.dart';
 
 class StorageRepositoryImpl implements StorageRepository {
   final RestClient client;
-
   StorageRepositoryImpl({required this.client});
 
   @override
@@ -21,16 +21,16 @@ class StorageRepositoryImpl implements StorageRepository {
       log('Erro ao criar usuário', error: e, stackTrace: s);
     }
   }
-
+  
   @override
-  Future<void> deleteStorage(Map<String, dynamic> storage) {
-    // TODO: implement deleteStorage
+  Future<List<StorageModel>> findAllStorages(int userId) {
+    // TODO: implement getStorage
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getStorage(Map<String, dynamic> user) {
-    // TODO: implement getStorage
+  Future<void> deleteStorage(Map<String, dynamic> storage) {
+    // TODO: implement deleteStorage
     throw UnimplementedError();
   }
 
@@ -40,3 +40,4 @@ class StorageRepositoryImpl implements StorageRepository {
     throw UnimplementedError();
   }
 }
+ 

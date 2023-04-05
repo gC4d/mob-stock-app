@@ -1,16 +1,32 @@
-# mob_storage_app
+# Mobile Storage
+Status: in devolopment 🚀
 
-A new Flutter project.
+## About the project
 
-## Getting Started
+This project is a mobile storage management system, developed using the flutter cross-platform development kit, along with its own API developed using the nodeJS express framework for communicating with the postgresSQl database.
 
-This project is a starting point for a Flutter application.
+## App technologies
+<ul>
+  <li>Flutter</li>
+  <li>Dart</li>
+  <li>Provider</li>
+  <li>Dio</li>
+  <li>Bloc</li>
+</ul>
 
-A few resources to get you started if this is your first Flutter project:
+## System technologies
+<ul>
+  <li>PostgresSQl</li>
+  <li>Docker</li>
+  <li>NodeJs</li>
+  <li>Express</li>
+</ul>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## How to test it?
+1 - Got to the root folder of the project<br>
+2 - Open a terminal in the location<br>
+3 - Type a command:
+```sh
+$ flutter run
+```
+4 - Select a device to used

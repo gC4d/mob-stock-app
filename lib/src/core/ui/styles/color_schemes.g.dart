@@ -20,7 +20,7 @@ const _lightColorScheme = ColorScheme(
   onErrorContainer: Color(0xFF410E0B),
   outline: Color(0xFF79747E),
   background: Color(0xFFFFFBFE),
-  onBackground: Color(0xFF1C1B1F),
+  onBackground: Color(0xFF2b2c33),
   surface: Color(0xFFFFFBFE),
   onSurface: Color(0xFF1C1B1F),
   surfaceVariant: Color(0xFFE7E0EC),
@@ -32,10 +32,11 @@ const _lightColorScheme = ColorScheme(
   surfaceTint: Color(0xFF6750A4),
   outlineVariant: Color(0xFFCAC4D0),
   scrim: Color(0xFF000000),
-);
+);  
+
 
 const _darkColorScheme = ColorScheme(
- brightness: Brightness.dark,
+  brightness: Brightness.dark,
   primary: Color(0xFFD0BCFF),
   onPrimary: Color(0xFF381E72),
   primaryContainer: Color(0xFF4F378B),
@@ -53,7 +54,7 @@ const _darkColorScheme = ColorScheme(
   errorContainer: Color(0xFF8C1D18),
   onErrorContainer: Color(0xFFF9DEDC),
   outline: Color(0xFF938F99),
-  background: Color(0xFF1C1B1F),
+  background: Color(0xFF2b2c33),
   onBackground: Color(0xFFE6E1E5),
   surface: Color(0xFF1C1B1F),
   onSurface: Color(0xFFE6E1E5),
@@ -67,4 +68,3 @@ const _darkColorScheme = ColorScheme(
   outlineVariant: Color(0xFF49454F),
   scrim: Color(0xFF000000),
 );
-
