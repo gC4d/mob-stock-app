@@ -18,55 +18,53 @@ class UserSignUpForm extends StatefulWidget {
 class _UserSignUpFormState extends BaseState<UserSignUpForm, SignUpController> {
    @override
    Widget build(BuildContext context) {
-       return SingleChildScrollView(
-         child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: CustomInputTextfield(
-                    label: "Nome",
-                    icon: const Icon(Icons.person_2_outlined),
-                    onChanged: (value) {
-                      controller.user = controller.user.copyWith(name: value);
-                      log("nome: ${controller.user.name}");
-                    },
-                  ),
+       return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: CustomInputTextfield(
+                  label: "Nome",
+                  icon: const Icon(Icons.person_2_outlined),
+                  onChanged: (value) {
+                    controller.user = controller.user.copyWith(name: value);
+                    log("nome: ${controller.user.name}");
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: CustomInputTextfield(
-                    label: "Email",
-                    icon: const Icon(Icons.mail_outline_rounded),
-                    onChanged: (value) {
-                       controller.user = controller.user.copyWith(email: value);
-                       log("email: ${controller.user.email}");
-                    },
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: CustomInputTextfield(
+                  label: "Email",
+                  icon: const Icon(Icons.mail_outline_rounded),
+                  onChanged: (value) {
+                     controller.user = controller.user.copyWith(email: value);
+                     log("email: ${controller.user.email}");
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: CustomInputTextfield(
-                    label: "Senha",
-                    icon: const Icon(Icons.lock_outline_rounded),
-                    onChanged: (value) {
-                       controller.user = controller.user.copyWith(password: value);
-                       log("senha: ${controller.user.password}");
-                    },
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: CustomInputTextfield(
+                  label: "Senha",
+                  icon: const Icon(Icons.lock_outline_rounded),
+                  onChanged: (value) {
+                     controller.user = controller.user.copyWith(password: value);
+                     log("senha: ${controller.user.password}");
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: CustomInputTextfield(
-                    label: "Confirmar senha",
-                    icon: const Icon(Icons.lock_outline_rounded),
-                    onChanged: (value) {
-                      controller.confirmPassword = value;
-                      log("confirmar senha: ${controller.confirmPassword}");
-                    },
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: CustomInputTextfield(
+                  label: "Confirmar senha",
+                  icon: const Icon(Icons.lock_outline_rounded),
+                  onChanged: (value) {
+                    controller.confirmPassword = value;
+                    log("confirmar senha: ${controller.confirmPassword}");
+                  },
                 ),
-              ],
-         ),
+              ),
+            ],
        );
   }
 }

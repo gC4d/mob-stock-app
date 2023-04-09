@@ -9,8 +9,8 @@ class RestClient extends DioForNative {
   RestClient()
       : super(BaseOptions(
           baseUrl: Env.i['base_url'] ?? '',
-          connectTimeout: const Duration(seconds: 1),
-          receiveTimeout: const Duration(seconds: 1),
+          connectTimeout: const Duration(seconds: 5),
+          receiveTimeout: const Duration(seconds: 5),
         )) {
     interceptors.add(
       LogInterceptor(

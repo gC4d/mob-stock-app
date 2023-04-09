@@ -2,9 +2,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:match/match.dart';
 
-import 'package:mob_storage_app/src/core/models/storage_model.dart';
+import 'package:mob_storage_app/src/core/models/stock_model.dart';
 
-import '../../core/models/products_model.dart';
+import '../../../core/models/products_model.dart';
 
 part 'stock_state.g.dart';
 

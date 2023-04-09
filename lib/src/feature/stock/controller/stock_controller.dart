@@ -2,16 +2,16 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:mob_storage_app/src/core/repositories/storages/storage_repository.dart';
-import 'package:mob_storage_app/src/feature/storage/dto/add_stock_dto.dart';
-import 'package:mob_storage_app/src/feature/storage/stock_state.dart';
+import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
+import 'package:mob_storage_app/src/feature/stock/controller/stock_state.dart';
 
-import '../../core/repositories/user/user_repository.dart';
+import '../../../core/repositories/user/user_repository.dart';
 
 class StockController extends Cubit<StockState> {
   final StorageRepository _storageRepository;
   final UserRepository _userRepository;
   late AddStockDto addStockDto =
-      AddStockDto(description: "", userId: null, category: null);
+      AddStockDto(description: "", user_id: null, category: null);
 
   StockController(
     this._storageRepository,
@@ -23,12 +23,13 @@ class StockController extends Cubit<StockState> {
       status: StockStateStatus.loading,
     ));
     try {
-      addStockDto.userId = await _userRepository.getUserid();
-      log("${addStockDto.toMap()}");
+      addStockDto.user_id = await _userRepository.getUserid();
       await _storageRepository.createStorage(addStockDto.toMap());
       emit(state.copyWith(
         status: StockStateStatus.success,
       ));
+
+      log(state.status.name);
     } catch (e, s) {
       log('Erro ao criar estoque', error: e, stackTrace: s);
       emit(state.copyWith(

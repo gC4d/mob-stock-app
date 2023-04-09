@@ -4,22 +4,22 @@ import 'dart:convert';
 
 class AddStockDto {
   String description;
-  int? userId;
+  int? user_id;
   int? category;
   AddStockDto({
     required this.description,
-    required this.userId,
+    required this.user_id,
     required this.category,
   });
 
   AddStockDto copyWith({
     String? description,
-    int? userId,
+    int? user_id,
     int? category,
   }) {
     return AddStockDto(
       description: description ?? this.description,
-      userId: userId ?? this.userId,
+      user_id: user_id ?? this.user_id,
       category: category ?? this.category,
     );
   }
@@ -27,7 +27,7 @@ class AddStockDto {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'description': description,
-      'userId': userId,
+      'user_id': user_id,
       'category': category,
     };
   }
@@ -35,7 +35,7 @@ class AddStockDto {
   factory AddStockDto.fromMap(Map<String, dynamic> map) {
     return AddStockDto(
       description: (map["description"] ?? '') as String,
-      userId: (map["userId"] ?? 0) as int,
+      user_id: (map["user_id"] ?? 0) as int,
       category: map['category'] != null ? map["category"] ?? 0 as int : null,
     );
   }
@@ -45,7 +45,7 @@ class AddStockDto {
   factory AddStockDto.fromJson(String source) => AddStockDto.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'AddStockDto(description: $description, userId: $userId, category: $category)';
+  String toString() => 'AddStockDto(description: $description, user_id: $user_id, category: $category)';
 
   @override
   bool operator ==(covariant AddStockDto other) {
@@ -53,10 +53,10 @@ class AddStockDto {
   
     return 
       other.description == description &&
-      other.userId == userId &&
+      other.user_id == user_id &&
       other.category == category;
   }
 
   @override
-  int get hashCode => description.hashCode ^ userId.hashCode ^ category.hashCode;
+  int get hashCode => description.hashCode ^ user_id.hashCode ^ category.hashCode;
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/custom_drawer.dart';
 import 'package:mob_storage_app/src/feature/home/home_controller.dart';
 import 'package:mob_storage_app/src/feature/home/home_state.dart';
 import 'package:bloc/bloc.dart';
 import '../../core/ui/base_state/base_state.dart';
-import 'widgets/custom_home_button.dart';
+import './widgets/custom_home_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,9 +18,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends BaseState<HomePage, HomeController> {
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
-    controller.checkUser();
+    await controller.checkUser();
+    controller.getStocks();
   }
 
   @override
@@ -41,66 +43,47 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
         success: () => true,
       ),
       builder: (context, state) {
+        
         return Scaffold(
           drawer: const CustomDrawer(),
           appBar: AppBar(
             title: const Text(
-              'Mobile Storage',
+              'MobStock',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             actions: [
-              IconButton(onPressed: () {
-                controller.logoutUser();
-              }, icon: const Icon(Icons.logout_outlined))
+              IconButton(
+                  onPressed: () {
+                    controller.logoutUser();
+                  },
+                  icon: const Icon(Icons.logout_outlined))
             ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
+            child: ListView.builder(
+              itemCount: state.stocks.length,
+              itemBuilder: (context, index) {
+                final stocks = state.stocks[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: CustomHomeButton(
-                    width: context.percentWidth(.9),
-                    height: context.percentHeight(.2),
-                    label: "Estoque 1",
-                    icon: Icons.storage_rounded,
-                    function: () {},
+                    height: context.percentHeight(.15),
+                    width: context.screenWidth,
+                    description: stocks.description,
+                    category: stocks.category,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: CustomHomeButton(
-                    width: context.percentWidth(.9),
-                    height: context.percentHeight(.2),
-                    label: "Estoque 2",
-                    icon: Icons.storage_rounded,
-                    function: () {},
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: CustomHomeButton(
-                    width: context.percentWidth(.9),
-                    height: context.percentHeight(.1),
-                    label: "Produtos",
-                    icon: Icons.shopping_cart_outlined,
-                    function: () {},
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context).pushNamed("/add/stock");
-            },
-          ),
+          floatingActionButton: FloatingActionButton.extended(
+              icon: const Icon(Icons.add),
+              label: const Text("Novo estoque"),
+              onPressed: () => Navigator.of(context).pushNamed("/add/stock")),
         );
       },
     );

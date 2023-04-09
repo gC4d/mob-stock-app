@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:match/match.dart';
 
-import 'package:mob_storage_app/src/core/models/storage_model.dart';
+import 'package:mob_storage_app/src/core/models/stock_model.dart';
 
 part 'home_state.g.dart';
 
@@ -18,23 +18,23 @@ enum HomeStateStatus {
 class HomeState extends Equatable {
   final HomeStateStatus status;
   final bool isLogged;
-  final List<StorageModel> storages;
+  final List<StockModel> stocks;
   final String? errorMessage;
 
   const HomeState({
-    required this.storages, 
+    required this.stocks, 
     required this.status,
     required this.isLogged,
     this.errorMessage,
   });
 
   @override
-  List<Object?> get props => [status, isLogged, errorMessage, storages];
+  List<Object?> get props => [status, isLogged, errorMessage, stocks];
 
   const HomeState.initial()
       : status = HomeStateStatus.initial,
         isLogged = false,
-        storages = const [],
+        stocks = const [],
         errorMessage = null;
   
   
@@ -42,13 +42,13 @@ class HomeState extends Equatable {
   HomeState copyWith({
     HomeStateStatus? status,
     bool? isLogged,
-    List<StorageModel>? storages,
+    List<StockModel>? stocks,
     String? errorMessage,
   }) {
     return HomeState(
       status: status ?? this.status,
       isLogged: isLogged ?? this.isLogged,
-      storages: storages ?? this.storages,
+      stocks: stocks ?? this.stocks,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

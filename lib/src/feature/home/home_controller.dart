@@ -42,6 +42,7 @@ class HomeController extends Cubit<HomeState> {
       );
     }
   }
+
   Future<void> logoutUser() async {
     emit(state.copyWith(status: HomeStateStatus.loading));
     try {
@@ -73,17 +74,16 @@ class HomeController extends Cubit<HomeState> {
     }
   }
 
-
-
-  Future<void> getStorages() async {
+  Future<void> getStocks() async {
     emit(state.copyWith(status: HomeStateStatus.loading));
-    try {
+    if(state.isLogged){
+       try {
       var id = await _userRepository.getUserid();
-      final storages = await _storageRepository.findAllStorages(id);
+      final stocks = await _storageRepository.findAllStocks(id);
       emit(
         state.copyWith(
           status: HomeStateStatus.success,
-          storages: storages,
+          stocks: stocks,
         ),
       );
     } catch (e, s) {
@@ -93,6 +93,7 @@ class HomeController extends Cubit<HomeState> {
             status: HomeStateStatus.error,
             errorMessage: 'Erro ao buscar estoques'),
       );
+    }
     }
   }
 }

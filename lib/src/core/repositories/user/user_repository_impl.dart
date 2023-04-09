@@ -23,6 +23,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<bool> checkforUserIsLogged() async {
     box = await Hive.openBox('UserBox');
     var user = await box.get('User');
+    log("$user");
     if (user == null) {
       log("Usuário não logado");
       return false;
@@ -49,6 +50,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       Response? user =
           await client.auth().get("/user/auth", data: authUserDto);
+          log("${user.data.runtimeType}");
       box = await Hive.openBox('UserBox');
       await box.put('User', user.data);
     } on DioError catch (e, s) {

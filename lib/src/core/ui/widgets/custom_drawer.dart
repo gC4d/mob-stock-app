@@ -27,7 +27,7 @@ class CustomDrawer extends StatelessWidget {
           icon: Icon(Icons.settings),
           label: Text('Configurações'),
         ),
-        SizedBox(height: context.percentHeight(.6),),
+        SizedBox(height: context.percentHeight(.57),),
         NavigationDrawerDestination(
           icon: const Icon(Icons.sync),
           label: SizedBox(

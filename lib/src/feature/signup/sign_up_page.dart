@@ -42,16 +42,70 @@ class _SignUpPageState extends BaseState<SignUpPage, SignUpController> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Cadastro de usuário'),
+          appBar: AppBar(),
+          body: Stack(
+            children: [
+              Container(
+                width: context.screenWidth,
+                height: context.screenheight,
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: context.percentHeight(.1),
+                  ),
+                  Container(
+                    height: context.percentHeight(.8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30)),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                          child: SizedBox(
+                            height: context.percentHeight(.082),
+                            child: const Text(
+                              "Cadastrar usuário",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        const UserSignUpForm(),
+                        SizedBox(
+                          height: context.percentHeight(.1),
+                        ),
+                        SizedBox(
+                          width: context.percentWidth(.8),
+                          height: context.percentHeight(.07),
+                          child: PrimaryButton(
+                            label: "Adicionar",
+                            onPressed: () {
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Column(
+        );
+      },
+    );
+  }
+}
+
+/* Column(
                 children: [
                   Container(
-                    height: context.percentHeight(.5),
                     padding: const EdgeInsets.fromLTRB(10, 40, 10, 20),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primaryContainer,
@@ -72,11 +126,4 @@ class _SignUpPageState extends BaseState<SignUpPage, SignUpController> {
                     ),
                   )
                 ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
+              ), */
