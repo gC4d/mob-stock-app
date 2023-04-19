@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/custom_drawer.dart';
+import 'package:mob_storage_app/src/core/ui/widgets/search_text_field.dart';
 import 'package:mob_storage_app/src/feature/home/home_controller.dart';
 import 'package:mob_storage_app/src/feature/home/home_state.dart';
 import 'package:bloc/bloc.dart';
@@ -43,10 +44,10 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
         success: () => true,
       ),
       builder: (context, state) {
-        
         return Scaffold(
           drawer: const CustomDrawer(),
           appBar: AppBar(
+            toolbarHeight: 60,
             title: const Text(
               'MobStock',
               style: TextStyle(
@@ -62,23 +63,35 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                   icon: const Icon(Icons.logout_outlined))
             ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ListView.builder(
-              itemCount: state.stocks.length,
-              itemBuilder: (context, index) {
-                final stocks = state.stocks[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: CustomHomeButton(
-                    height: context.percentHeight(.15),
-                    width: context.screenWidth,
-                    description: stocks.description,
-                    category: stocks.category,
+          body: Stack(
+            children: [
+              Container(
+                height: context.percentHeight(.05),
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              SearchTextField(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: ListView.builder(
+                    itemCount: state.stocks.length,
+                    itemBuilder: (context, index) {
+                      final stocks = state.stocks[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: CustomHomeButton(
+                          height: context.percentHeight(.15),
+                          width: context.screenWidth,
+                          description: stocks.description,
+                          category: stocks.category,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           ),
           floatingActionButton: FloatingActionButton.extended(
               icon: const Icon(Icons.add),

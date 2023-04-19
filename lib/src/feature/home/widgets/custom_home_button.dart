@@ -6,7 +6,7 @@ class CustomHomeButton extends StatelessWidget {
   final double height;
   final double width;
   final String description;
-  final String category;
+  final int category;
   const CustomHomeButton({
     Key? key,
     required this.height,
@@ -14,6 +14,26 @@ class CustomHomeButton extends StatelessWidget {
     required this.description,
     required this.category,
   }) : super(key: key);
+
+
+ String getCategory(int categoryIndex){
+    String category = '';
+    switch (categoryIndex) {
+      case 0:
+         category = "Matéria-prima"; 
+        break;
+      case 1:
+         category = "Bens de varejo"; 
+        break;
+      case 2:
+         category = "Consumo interno"; 
+        break;
+      case 3:
+         category = "Estoque de segurança"; 
+        break;
+    }
+    return category;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +67,7 @@ class CustomHomeButton extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  category.toString(),
+                  getCategory(category),
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
