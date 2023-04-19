@@ -8,7 +8,7 @@ import 'products_model.dart';
 class StockModel {
   int id;
   String description;
-  String category;
+  int category;
   int? amount;
   List<ProductsModel>? products;
   StockModel({
@@ -22,7 +22,7 @@ class StockModel {
   StockModel copyWith({
     int? id,
     String? description,
-    String? category,
+    int? category,
     int? amount,
     List<ProductsModel>? products,
   }) {
@@ -49,7 +49,7 @@ class StockModel {
     return StockModel(
       id: (map["id"] ?? 0) as int,
       description: (map["description"] ?? '') as String,
-      category: (map["category"] ?? '') as String,
+      category: (map["category"] ?? 0) as int,
       amount: map['amount'] != null ? map["amount"] ?? 0 as int : null,
       products: map['products'] != null ? List<ProductsModel>.from(((map['products']) as List).map<ProductsModel?>((x) {return ProductsModel.fromMap((x?? Map<String,dynamic>.from({})) as Map<String,dynamic>);}),) : null,
     );

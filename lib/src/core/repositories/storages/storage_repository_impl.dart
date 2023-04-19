@@ -30,19 +30,21 @@ class StorageRepositoryImpl implements StorageRepository {
     try {
       Response user = await client.auth().get(
         "/stock/read/all",
-        data: {"id_user": userId},
+        data: {"user_id": userId},
       );
       
-      List<dynamic> dataObject = user.data;
-      late List<StockModel> stocks = [];
-      log("${dataObject.runtimeType}");
+      var dataObject = user.data;
+      log("Response values: $dataObject");
+
+      List<StockModel> stocks = [];
+
       for (var element in dataObject) {
-        log("${element.runtimeType}");
         stocks.add(
           StockModel.fromMap(element), 
         );
       }
       return stocks;
+
     } on DioError catch (e, s) {
       log("Erro ao buscar estoques", error: e, stackTrace: s);
       throw Exception("Erro ao buscar estoques");
