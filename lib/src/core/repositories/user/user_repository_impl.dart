@@ -36,7 +36,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> signUpUser(Map<String, dynamic> user) async {
     try {
       Response response = await client.unauth().post(
-            '/user/register',
+            '/user/create',
             data: user,
           );
       log('$response');
