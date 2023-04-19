@@ -32,24 +32,44 @@ class _AddStockPageState extends BaseState<AddStockPage, StockController> {
             });
       },
       buildWhen: (previous, current) => current.status.matchAny(
-              any: () => false,
-              initial: () => false,
-              success: () => true,
-            ),
+        any: () => false,
+        initial: () => false,
+        success: () => true,
+      ),
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
           body: Stack(
             children: [
-              Container(
-                width: context.screenWidth,
-                height: context.screenheight,
-                color: Theme.of(context).colorScheme.primaryContainer,
+              Column(
+                children: [
+                  Container(
+                    width: context.screenWidth,
+                    height: context.percentHeight(.5),
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
+                  Container(
+                    width: context.screenWidth,
+                    height: context.percentHeight(.4),
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+                ],
               ),
               SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: SizedBox(
+                          child: IconButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              icon: const Icon(
+                                  Icons.arrow_back_ios_new_outlined)),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 10, 20, 50),
                       child: SizedBox(
