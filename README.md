@@ -22,11 +22,3 @@ This project is a mobile stock management system, developed using the flutter cr
   <li>Express</li>
 </ul>
 
-## How to test it?
-1 - Got to the root folder of the project<br>
-2 - Open a terminal in the location<br>
-3 - Type a command:
-```sh
-$ flutter run
-```
-4 - Select a device to used
