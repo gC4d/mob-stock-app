@@ -4,6 +4,8 @@ import 'package:match/match.dart';
 
 import 'package:mob_storage_app/src/core/models/stock_model.dart';
 
+import '../../core/models/user_model.dart';
+
 part 'home_state.g.dart';
 
 @match
@@ -19,10 +21,12 @@ class HomeState extends Equatable {
   final HomeStateStatus status;
   final bool isLogged;
   final List<StockModel> stocks;
+  final UserModel? user;
   final String? errorMessage;
 
   const HomeState({
-    required this.stocks, 
+    required this.stocks,
+    this.user,  
     required this.status,
     required this.isLogged,
     this.errorMessage,
@@ -34,6 +38,7 @@ class HomeState extends Equatable {
   const HomeState.initial()
       : status = HomeStateStatus.initial,
         isLogged = false,
+        user = null,
         stocks = const [],
         errorMessage = null;
   
@@ -43,12 +48,14 @@ class HomeState extends Equatable {
     HomeStateStatus? status,
     bool? isLogged,
     List<StockModel>? stocks,
+    UserModel? user,
     String? errorMessage,
   }) {
     return HomeState(
       status: status ?? this.status,
       isLogged: isLogged ?? this.isLogged,
       stocks: stocks ?? this.stocks,
+      user: user ?? this.user,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

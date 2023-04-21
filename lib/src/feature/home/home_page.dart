@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
+import 'package:mob_storage_app/src/core/ui/helpers/text_styles_helper.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/custom_drawer.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/search_text_field.dart';
 import 'package:mob_storage_app/src/feature/home/home_controller.dart';
 import 'package:mob_storage_app/src/feature/home/home_state.dart';
 import 'package:bloc/bloc.dart';
+import 'package:mob_storage_app/src/feature/home/widgets/user_button.dart';
 import '../../core/ui/base_state/base_state.dart';
 import './widgets/custom_home_button.dart';
+import 'widgets/home_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -46,34 +49,16 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
       builder: (context, state) {
         return Scaffold(
           drawer: const CustomDrawer(),
-          appBar: AppBar(
-            toolbarHeight: 60,
-            title: const Text(
-              'MobStock',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    controller.logoutUser();
-                  },
-                  icon: const Icon(Icons.logout_outlined))
-            ],
-          ),
           body: Stack(
             children: [
-              Container(
-                height: context.percentHeight(.05),
-                color: Theme.of(context).colorScheme.primaryContainer,
+              const Padding(
+                padding: EdgeInsets.fromLTRB(8, 30, 8, 0),
+                child: HomeAppBar()
               ),
-              SearchTextField(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 230, 0, 0),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: ListView.builder(
                     itemCount: state.stocks.length,
                     itemBuilder: (context, index) {
@@ -93,9 +78,8 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
               ),
             ],
           ),
-          floatingActionButton: FloatingActionButton.extended(
-              icon: const Icon(Icons.add),
-              label: const Text("Novo estoque"),
+          floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.add),
               onPressed: () => Navigator.of(context).pushNamed("/add/stock")),
         );
       },
