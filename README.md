@@ -1,9 +1,9 @@
-# Mobile Storage
+# MobStock
 Status: in devolopment 🚀
 
 ## About the project
 
-This project is a mobile storage management system, developed using the flutter cross-platform development kit, along with its own API developed using the nodeJS express framework for communicating with the postgresSQl database.
+This project is a mobile stock management system, developed using the flutter cross-platform development kit, along with its own API developed using the nodeJS express framework for communicating with the postgresSQl database.
 
 ## App technologies
 <ul>
