@@ -13,18 +13,9 @@ class HomeRouter {
 
   static Widget get page => MultiProvider(
         providers: [
-          Provider<UserRepository>(
-            create: (context) => UserRepositoryImpl(
-              client: context.read(),
-            ),
-          ),
-          Provider<StorageRepository>(
-            create: (context) => StorageRepositoryImpl(
-              client: context.read(),
-            ),
-          ),
           Provider(
             create: (context) => HomeController(
+              context.read(),
               context.read(),
               context.read(),
             ),

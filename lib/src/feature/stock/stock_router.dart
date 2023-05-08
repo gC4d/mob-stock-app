@@ -13,39 +13,13 @@ class StockRouter {
   StockRouter._();
 
     static Widget get page => MultiProvider(
-        providers: [
-          Provider<StorageRepository>(
-            create: (context) => StorageRepositoryImpl(
-              client: context.read(),
-            ),
-          ),
-          Provider<UserRepository>(
-            create: (context) => UserRepositoryImpl(
-              client: context.read(),
-            ),
-          ),
-          Provider(create: (context) => StockController(
-            context.read(), context.read()
-          ))
-        ],
+        providers: [],
         child: const StockPage(),
       );
 
   static Widget get addPage => MultiProvider(
         providers: [
-          Provider<StorageRepository>(
-            create: (context) => StorageRepositoryImpl(
-              client: context.read(),
-            ),
-          ),
-          Provider<UserRepository>(
-            create: (context) => UserRepositoryImpl(
-              client: context.read(),
-            ),
-          ),
-          Provider(create: (context) => StockController(
-            context.read(), context.read()
-          ))
+          Provider(create: (context) => StockController(context.read(), context.read()))
         ],
         child: const  AddStockPage(),
       );

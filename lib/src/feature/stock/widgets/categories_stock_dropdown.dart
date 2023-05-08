@@ -25,7 +25,7 @@ class _CategoriesStockDropdownState
         ),
         underline: Container(),
         isExpanded: true,
-        value: controller.addStockDto.category,
+        value: controller.stockData.category,
         items: const <DropdownMenuItem<int>>[
           DropdownMenuItem(
             value: 0,
@@ -70,8 +70,8 @@ class _CategoriesStockDropdownState
         ],
         onChanged: ((newValue) {
           setState(() {
-            controller.addStockDto = controller.addStockDto.copyWith(category: newValue);
-            log("${controller.addStockDto.category}");
+            controller.stockData = controller.stockData.copyWith(category: newValue);
+            log("${controller.stockData.category}");
           });
         }),
       ),

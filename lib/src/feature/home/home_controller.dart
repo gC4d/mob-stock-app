@@ -2,15 +2,17 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/repositories/storages/storage_repository.dart';
 import 'package:mob_storage_app/src/core/repositories/user/user_repository.dart';
+import 'package:mob_storage_app/src/core/services/sincronizer/synchronizer.dart';
 import 'package:mob_storage_app/src/feature/home/home_state.dart';
 
 class HomeController extends Cubit<HomeState> {
   final UserRepository _userRepository;
   final StorageRepository _storageRepository;
-
+  final Synchronizer synchronizer;
   HomeController(
     this._userRepository,
     this._storageRepository,
+    this.synchronizer,
   ) : super(const HomeState.initial());
 
   Future<void> checkUser() async {
@@ -76,24 +78,26 @@ class HomeController extends Cubit<HomeState> {
 
   Future<void> getStocks() async {
     emit(state.copyWith(status: HomeStateStatus.loading));
-    if(state.isLogged){
-       try {
-      var id = await _userRepository.getUserid();
-      final stocks = await _storageRepository.findAllStocks(id);
-      emit(
-        state.copyWith(
-          status: HomeStateStatus.success,
-          stocks: stocks,
-        ),
-      );
-    } catch (e, s) {
-      log('Erro ao buscar estoques', error: e, stackTrace: s);
-      emit(
-        state.copyWith(
-            status: HomeStateStatus.error,
-            errorMessage: 'Erro ao buscar estoques'),
-      );
-    }
+    if (state.isLogged) {
+      try {
+        await synchronizer.SynchronizeStocks();
+
+        final stocks = await _storageRepository.localFindAllStocks();
+        //await _storageRepository.syncStocks();
+        emit(
+          state.copyWith(
+            status: HomeStateStatus.success,
+            stocks: stocks,
+          ),
+        );
+      } catch (e, s) {
+        log('Erro ao buscar estoques', error: e, stackTrace: s);
+        emit(
+          state.copyWith(
+              status: HomeStateStatus.error,
+              errorMessage: 'Erro ao buscar estoques'),
+        );
+      }
     }
   }
 }

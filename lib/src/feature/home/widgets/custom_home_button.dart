@@ -15,21 +15,20 @@ class CustomHomeButton extends StatelessWidget {
     required this.category,
   }) : super(key: key);
 
-
- String getCategory(int categoryIndex){
+  String getCategory(int categoryIndex) {
     String category = '';
     switch (categoryIndex) {
       case 0:
-         category = "Matéria-prima"; 
+        category = "Matéria-prima";
         break;
       case 1:
-         category = "Bens de varejo"; 
+        category = "Bens de varejo";
         break;
       case 2:
-         category = "Consumo interno"; 
+        category = "Consumo interno";
         break;
       case 3:
-         category = "Estoque de segurança"; 
+        category = "Estoque de segurança";
         break;
     }
     return category;
@@ -38,7 +37,8 @@ class CustomHomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed("/stock", arguments: {"stock_description": description}),
+      onTap: () => Navigator.of(context)
+          .pushNamed("/stock", arguments: {"stock_description": description}),
       child: Container(
         width: width,
         height: height,
@@ -50,7 +50,6 @@ class CustomHomeButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -82,7 +81,7 @@ class CustomHomeButton extends StatelessWidget {
                 ),
               ],
             ),
-            //IconButton(onPressed: () {}, icon: Icon(Icons.)),
+           
           ],
         ),
       ),

@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
 import 'package:mob_storage_app/src/core/data/database/database.dart';
-import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
-import 'package:mob_storage_app/src/core/models/stock_model.dart';
 import 'package:mob_storage_app/src/core/repositories/user/user_repository.dart';
 
 import './storage_repository.dart';
@@ -26,44 +23,56 @@ class StorageRepositoryImpl implements StorageRepository {
       log("$stockData");
       int userId = await userRepository.getUserid();
       for (StockData element in stockData) {
-          Map<String, dynamic> data = element.toJson();
-          data.remove('sync');
-          data.addAll({'user_id': userId});
-          log("syncing stock data: $data");
-          log("syncing stock data: ${data['user_id']}");
+        Map<String, dynamic> data = element.toJson();
+        data.remove('sync');
+        data.addAll({'user_id': userId});
 
-          var respose = await client.auth().post(
-                "/stock/create",
-                data: data,
-              );
-          log("$respose");
-          await db.setStockToSynced(data['id']);
+        log("Syncing stock data: $data");
+        log("Syncing stock data id: ${data['user_id']}");
+
+        var respose = await client.auth().post(
+              "/stock/create",
+              data: data,
+            );
+
+        log("$respose");
+
+        await db.setStockToSynced(data['id']);
       }
     } on DioError catch (e, s) {
       log('Erro ao criar estoque', error: e, stackTrace: s);
-      throw Exception();
+      throw Exception('Erro ao criar estoque');
     }
   }
 
   @override
-  Future<List<StockModel>> syncFindAllStocks(int userId) async {
+  Future<void> syncFindAllStocks() async {
+    List<StockData> localStocks = [];
     try {
+      int userId = await userRepository.getUserid();
       Response user = await client.auth().get(
         "/stock/read/all",
         data: {"user_id": userId},
       );
 
-      var dataObject = user.data;
-      log("Response values: $dataObject");
+      var syncStocks = user.data;
 
-      List<StockModel> stocks = [];
-
-      for (var element in dataObject) {
-        stocks.add(
-          StockModel.fromMap(element),
-        );
+      localStocks = await localFindAllStocks();
+      log("Response values: $syncStocks");
+      log("Local values: $localStocks");
+      for (var i in syncStocks) {
+        if (checkForExistStock(localStocks, syncStocks) == 0 ||
+            localStocks.isEmpty) {
+          StockData stock = StockData(
+            id: 0,
+            description: i['description'],
+            category: i['category'],
+            amount: i['amount'],
+            sync: 1,
+          );
+          await localCreateStock(stock);
+        }
       }
-      return stocks;
     } on DioError catch (e, s) {
       log("Erro ao buscar estoques", error: e, stackTrace: s);
       throw Exception("Erro ao buscar estoques");
@@ -85,13 +94,12 @@ class StorageRepositoryImpl implements StorageRepository {
   // Local Methods
 
   @override
-  Future<void> localCreateStock(AddStockDto addStockDto) async {
+  Future<void> localCreateStock(StockData stock) async {
     final entity = StockCompanion(
-      description: Value(addStockDto.description),
-      category: Value(addStockDto.category),
-      amount: const Value(0),
-      sync: const Value(0)
-    );
+        description: Value(stock.description),
+        category: Value(stock.category),
+        amount: Value(stock.amount ?? 0),
+        sync: Value(stock.sync));
 
     db.insertStock(entity);
   }
@@ -113,5 +121,16 @@ class StorageRepositoryImpl implements StorageRepository {
   Future<void> localUpdateStorage(Map<String, dynamic> storage) {
     // TODO: implement localUpdateStorage
     throw UnimplementedError();
+  }
+
+  int checkForExistStock(List<StockData> localStocks, var syncStocks) {
+    for (var i in syncStocks) {
+      for (var j in localStocks) {
+        if (j.description == i['description'] && j.category == i['category']) {
+          return 1;
+        }
+      }
+    }
+    return 0;
   }
 }

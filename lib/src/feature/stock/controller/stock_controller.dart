@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:mob_storage_app/src/core/data/database/database.dart';
 import 'package:mob_storage_app/src/core/repositories/storages/storage_repository.dart';
-import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
 import 'package:mob_storage_app/src/feature/stock/controller/stock_state.dart';
 
 import '../../../core/repositories/user/user_repository.dart';
@@ -10,8 +10,7 @@ import '../../../core/repositories/user/user_repository.dart';
 class StockController extends Cubit<StockState> {
   final StorageRepository _storageRepository;
   final UserRepository _userRepository;
-  late AddStockDto addStockDto =
-      AddStockDto(description: "", user_id: null, category: null);
+  late StockData stockData = StockData(description: '', category: 0, amount: 0, id: 0, sync: 0);
 
   StockController(
     this._storageRepository,
@@ -23,8 +22,8 @@ class StockController extends Cubit<StockState> {
       status: StockStateStatus.loading,
     ));
     try {
-      addStockDto.user_id = await _userRepository.getUserid();
-      await _storageRepository.createStorage(addStockDto.toMap());
+      await _storageRepository.localCreateStock(stockData);
+
       emit(state.copyWith(
         status: StockStateStatus.success,
       ));

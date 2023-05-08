@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mob_storage_app/src/core/dto/add_stock_dto.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/text_styles_helper.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/custom_drawer.dart';

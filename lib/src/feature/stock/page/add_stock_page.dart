@@ -109,10 +109,10 @@ class _AddStockPageState extends BaseState<AddStockPage, StockController> {
                                 label: "Descrição",
                                 icon: const Icon(Icons.storage_rounded),
                                 onChanged: (value) {
-                                  controller.addStockDto = controller
-                                      .addStockDto
+                                  controller.stockData = controller
+                                      .stockData
                                       .copyWith(description: value);
-                                  log("nome: ${controller.addStockDto.description}");
+                                  log("nome: ${controller.stockData.description}");
                                 },
                               ),
                             ),

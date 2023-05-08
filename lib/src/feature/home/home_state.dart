@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:match/match.dart';
+import 'package:mob_storage_app/src/core/data/database/database.dart';
 
 import 'package:mob_storage_app/src/core/models/stock_model.dart';
 
@@ -20,7 +21,7 @@ enum HomeStateStatus {
 class HomeState extends Equatable {
   final HomeStateStatus status;
   final bool isLogged;
-  final List<StockModel> stocks;
+  final List<StockData> stocks;
   final UserModel? user;
   final String? errorMessage;
 
@@ -47,7 +48,7 @@ class HomeState extends Equatable {
   HomeState copyWith({
     HomeStateStatus? status,
     bool? isLogged,
-    List<StockModel>? stocks,
+    List<StockData>? stocks,
     UserModel? user,
     String? errorMessage,
   }) {
