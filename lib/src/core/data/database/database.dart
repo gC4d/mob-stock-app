@@ -51,4 +51,8 @@ class AppDb extends _$AppDb {
   Future<int> insertStock(StockCompanion stockEntity) async {
     return await into(stock).insert(stockEntity);
   }
+
+  Future<void> deleteStocks() async {
+    await (delete(stock)..where((tbl) => tbl.sync.equals(1))).go();
+  }
 }

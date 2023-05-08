@@ -33,12 +33,16 @@ class $StockTable extends Stock with TableInfo<$StockTable, StockData> {
   @override
   late final GeneratedColumn<int> amount = GeneratedColumn<int>(
       'amount', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   static const VerificationMeta _syncMeta = const VerificationMeta('sync');
   @override
   late final GeneratedColumn<int> sync = GeneratedColumn<int>(
       'sync', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   @override
   List<GeneratedColumn> get $columns =>
       [id, description, category, amount, sync];
@@ -71,14 +75,10 @@ class $StockTable extends Stock with TableInfo<$StockTable, StockData> {
     if (data.containsKey('amount')) {
       context.handle(_amountMeta,
           amount.isAcceptableOrUnknown(data['amount']!, _amountMeta));
-    } else if (isInserting) {
-      context.missing(_amountMeta);
     }
     if (data.containsKey('sync')) {
       context.handle(
           _syncMeta, sync.isAcceptableOrUnknown(data['sync']!, _syncMeta));
-    } else if (isInserting) {
-      context.missing(_syncMeta);
     }
     return context;
   }
@@ -219,12 +219,10 @@ class StockCompanion extends UpdateCompanion<StockData> {
     this.id = const Value.absent(),
     required String description,
     required int category,
-    required int amount,
-    required int sync,
+    this.amount = const Value.absent(),
+    this.sync = const Value.absent(),
   })  : description = Value(description),
-        category = Value(category),
-        amount = Value(amount),
-        sync = Value(sync);
+        category = Value(category);
   static Insertable<StockData> custom({
     Expression<int>? id,
     Expression<String>? description,
