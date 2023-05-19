@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mob_storage_app/src/feature/stock/widgets/custom_fab/expanded_fab.dart';
 
 class StockPage extends StatefulWidget {
   const StockPage({super.key});
@@ -14,9 +15,10 @@ class _StockPageState extends State<StockPage> {
     final Map<String, dynamic> tools = mRoute as Map<String, dynamic>;
     return Scaffold(
       appBar: AppBar(
-        title: Text(tools["stock_description"]),
+        title: Text("teste"),
       ),
       body: Container(),
+      floatingActionButton: ExpandedFab()
     );
   }
 }
