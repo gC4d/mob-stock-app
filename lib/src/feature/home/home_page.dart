@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
@@ -8,6 +10,8 @@ import 'package:mob_storage_app/src/feature/home/home_controller.dart';
 import 'package:mob_storage_app/src/feature/home/home_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:mob_storage_app/src/feature/home/widgets/user_button.dart';
+import 'package:mob_storage_app/src/feature/stock/page/stock_page.dart';
+import 'package:mob_storage_app/src/feature/stock/stock_router.dart';
 import '../../core/ui/base_state/base_state.dart';
 import './widgets/custom_home_button.dart';
 import 'widgets/home_app_bar.dart';
@@ -20,10 +24,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BaseState<HomePage, HomeController> {
+
+  String userName = "Usuario";  
   @override
   void onReady() async {
     super.onReady();
     await controller.checkUser();
+    git userName = await controller.getUserName;
     controller.getStocks();
   }
 
@@ -50,12 +57,12 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
           drawer: const CustomDrawer(),
           body: Stack(
             children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(8, 30, 8, 0),
-                child: HomeAppBar()
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 30, 8, 10),
+                child: HomeAppBar(userName: userName,),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 230, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 220, 0, 0),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: ListView.builder(
@@ -64,11 +71,21 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                       final stocks = state.stocks[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: CustomHomeButton(
-                          height: context.percentHeight(.15),
-                          width: context.screenWidth,
-                          description: stocks.description,
-                          category: stocks.category,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return const StockPage();
+                              }),
+                            );
+                          },
+                          child: CustomHomeButton(
+                            height: context.percentHeight(.15),
+                            width: context.screenWidth,
+                            description: stocks.description,
+                            category: stocks.category,
+                          ),
                         ),
                       );
                     },
@@ -79,7 +96,9 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
           ),
           floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
-              onPressed: () => Navigator.of(context).pushNamed("/add/stock")),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/add/stock");
+              }),
         );
       },
     );
