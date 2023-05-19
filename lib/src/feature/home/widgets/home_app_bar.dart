@@ -6,8 +6,8 @@ import '../../../core/ui/widgets/search_text_field.dart';
 import 'user_button.dart';
 
 class HomeAppBar extends StatelessWidget {
-
-  const HomeAppBar({ super.key });
+  final String userName;
+  const HomeAppBar({ super.key, required this.userName });
 
    @override
    Widget build(BuildContext context) {
@@ -35,14 +35,14 @@ class HomeAppBar extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const UserButton(user_name: "")
+                            UserButton(user_name: userName.characters.first)
                           ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 15, 15, 0),
                         child: Text(
-                          'Olá, Guilherme',
+                          'Olá, $userName',
                           style: context.textStyles.textBold
                               .copyWith(fontSize: 30),
                         ),

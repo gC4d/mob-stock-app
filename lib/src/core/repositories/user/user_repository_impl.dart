@@ -76,4 +76,16 @@ class UserRepositoryImpl implements UserRepository {
     } catch (e) {}
     return 0;
   }
+  
+  @override
+  Future<String> getUserName() async {
+    try{
+      box = await Hive.openBox('UserBox');
+      var user = await box.get('User');
+      String name = user["name"];
+      log("tst: ${user["name"]}");
+      return name;
+    } catch (e) {}
+    return 'Usuario';
+  }
 }
