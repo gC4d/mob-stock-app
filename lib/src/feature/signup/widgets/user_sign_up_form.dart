@@ -1,11 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
-import 'package:mob_storage_app/src/feature/signup/sign_up_controller.dart';
-
 import '../../../core/ui/base_state/base_state.dart';
 import '../../../core/ui/widgets/custom_input_TextField.dart';
+import '../controller/sign_up_controller.dart';
 
 class UserSignUpForm extends StatefulWidget {
 
