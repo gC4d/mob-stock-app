@@ -122,11 +122,11 @@ class _AddStockPageState extends BaseState<AddStockPage, StockController> {
                               child: Container(
                                 width: context.screenWidth,
                                 height: context.percentHeight(.08),
-                                padding: const EdgeInsets.only(top: 9),
+                                padding: const EdgeInsets.only(top: 5, bottom: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                      width: 1, color: Colors.white38),
+                                      width: 1, color: Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.5)),
                                 ),
                                 child: const CategoriesStockDropdown(),
                               ),
