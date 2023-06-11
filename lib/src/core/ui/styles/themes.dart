@@ -23,6 +23,7 @@ ThemeData get lightTheme => ThemeData(
 ThemeData get darkTheme => ThemeData(
       useMaterial3: true,
       colorScheme: _darkColorScheme,
+      
       appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: _darkColorScheme.primaryContainer,
