@@ -9,5 +9,6 @@ abstract class StorageRepository {
   Future<void> localCreateStock(StockData stock);
   Future<List<StockData>> localFindAllStocks();
   Future<void> localUpdateStorage(Map<String, dynamic> storage);
-  Future<void> localDeleteStorage(Map<String, dynamic> storage);
+  Future<void> localDeleteStock(int id);
+  Future<void> localDeleteAllStocks();
 }

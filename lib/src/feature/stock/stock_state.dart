@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:match/match.dart';
+import 'package:mob_storage_app/src/core/data/database/database.dart';
 
-import 'package:mob_storage_app/src/core/models/stock_model.dart';
-
-import '../../../core/models/products_model.dart';
+import '../../core/models/user_model.dart';
 
 part 'stock_state.g.dart';
 
@@ -18,38 +17,33 @@ enum StockStateStatus {
 
 class StockState extends Equatable {
   final StockStateStatus status;
-  final int? category;
-  final List<ProductsModel>? products;
+  final List<StockData> stocks;
   final String? errorMessage;
 
   const StockState({
-    required this.products, 
-    required this.category, 
+    required this.stocks,
     required this.status,
     this.errorMessage,
   });
 
   @override
-  List<Object?> get props => [status, category, errorMessage, products];
+  List<Object?> get props => [status, errorMessage, stocks];
 
   const StockState.initial()
       : status = StockStateStatus.initial,
-        category = null,
-        products = const [],
+        stocks = const [],
         errorMessage = null;
-  
-  
 
   StockState copyWith({
     StockStateStatus? status,
-    int? category,
-    List<ProductsModel>? products,
+    bool? isLogged,
+    List<StockData>? stocks,
+    UserModel? user,
     String? errorMessage,
   }) {
     return StockState(
       status: status ?? this.status,
-      category: category ?? this.category,
-      products: products ?? this.products,
+      stocks: stocks ?? this.stocks,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

@@ -8,6 +8,7 @@ import 'src/core/configuration/env/env.dart';
 import 'src/core/services/hive/hive_config.dart';
 
 Future<void> main() async {
+
   await Env.i.load();
   DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();

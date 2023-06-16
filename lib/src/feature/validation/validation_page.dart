@@ -28,16 +28,10 @@ class _ValidationPageState
     return BlocConsumer<ValidationController, ValidationState>(
       listener: (context, state) => state.status.matchAny(
           any: () {},
-          userNotLogged: () =>
-              Navigator.of(context).popAndPushNamed(Routes.SPLASH),
-          userLogged: () {
-            Navigator.of(context).popAndPushNamed(Routes.HOME);
-          }),
+      ),
       buildWhen: (previous, current) => current.status.matchAny(
         any: () => false,
         initial: () => false,
-        userLogged: () => true,
-        userNotLogged: () => true,
       ),
       builder: (context, state) {
         return Scaffold(

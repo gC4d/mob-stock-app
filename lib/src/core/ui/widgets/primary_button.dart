@@ -18,14 +18,14 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
-              Theme.of(context).colorScheme.onPrimaryContainer),
+              Theme.of(context).colorScheme.secondary),
               elevation: MaterialStateProperty.all(elevation)
         ),
         onPressed: onPressed,
         child: Text(label, style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.primaryContainer
+          color: Theme.of(context).colorScheme.onSecondary
         ),),
       ),
     );

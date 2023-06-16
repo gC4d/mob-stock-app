@@ -11,10 +11,7 @@ extension ValidationStateStatusMatch on ValidationStateStatus {
       {required T Function() initial,
       required T Function() loading,
       required T Function() error,
-      required T Function() userLogged,
-      required T Function() userNotLogged,
-      required T Function() haveGroups,
-      required T Function() doNotHaveGroups}) {
+      required T Function() sucess}) {
     final v = this;
     if (v == ValidationStateStatus.initial) {
       return initial();
@@ -28,20 +25,8 @@ extension ValidationStateStatusMatch on ValidationStateStatus {
       return error();
     }
 
-    if (v == ValidationStateStatus.userLogged) {
-      return userLogged();
-    }
-
-    if (v == ValidationStateStatus.userNotLogged) {
-      return userNotLogged();
-    }
-
-    if (v == ValidationStateStatus.haveGroups) {
-      return haveGroups();
-    }
-
-    if (v == ValidationStateStatus.doNotHaveGroups) {
-      return doNotHaveGroups();
+    if (v == ValidationStateStatus.sucess) {
+      return sucess();
     }
 
     throw Exception(
@@ -53,10 +38,7 @@ extension ValidationStateStatusMatch on ValidationStateStatus {
       T Function()? initial,
       T Function()? loading,
       T Function()? error,
-      T Function()? userLogged,
-      T Function()? userNotLogged,
-      T Function()? haveGroups,
-      T Function()? doNotHaveGroups}) {
+      T Function()? sucess}) {
     final v = this;
     if (v == ValidationStateStatus.initial && initial != null) {
       return initial();
@@ -70,20 +52,8 @@ extension ValidationStateStatusMatch on ValidationStateStatus {
       return error();
     }
 
-    if (v == ValidationStateStatus.userLogged && userLogged != null) {
-      return userLogged();
-    }
-
-    if (v == ValidationStateStatus.userNotLogged && userNotLogged != null) {
-      return userNotLogged();
-    }
-
-    if (v == ValidationStateStatus.haveGroups && haveGroups != null) {
-      return haveGroups();
-    }
-
-    if (v == ValidationStateStatus.doNotHaveGroups && doNotHaveGroups != null) {
-      return doNotHaveGroups();
+    if (v == ValidationStateStatus.sucess && sucess != null) {
+      return sucess();
     }
 
     return any();

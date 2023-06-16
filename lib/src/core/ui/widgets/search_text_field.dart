@@ -17,10 +17,10 @@ class _SearchTextFieldState extends State<SearchTextField> {
       children: [
         TextField(
           textAlign: TextAlign.justify,
-          textAlignVertical: TextAlignVertical.top,
+          textAlignVertical: TextAlignVertical.center,
           onChanged: (value) {},
           decoration: InputDecoration(
-            fillColor: Theme.of(context).colorScheme.outline.withOpacity(.5),
+            fillColor: Theme.of(context).colorScheme.background.withOpacity(.5),
             filled: true,
             focusColor: Theme.of(context).colorScheme.primaryContainer,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),

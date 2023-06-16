@@ -26,6 +26,7 @@ class HomeController extends Cubit<HomeState> {
             isLogged: isLogged,
           ),
         );
+
       } else {
         emit(
           state.copyWith(

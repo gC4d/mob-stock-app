@@ -4,12 +4,13 @@ import 'package:drift/drift.dart';
 import 'package:mob_storage_app/src/core/data/database/database.dart';
 import 'package:mob_storage_app/src/core/repositories/user/user_repository.dart';
 
+import '../../data/controller/data_controller.dart';
 import './storage_repository.dart';
 import 'package:mob_storage_app/src/core/services/client/rest_client.dart';
 
 class StorageRepositoryImpl implements StorageRepository {
   final RestClient client;
-  final AppDb db;
+  final DataController db;
   final UserRepository userRepository;
   StorageRepositoryImpl(
       {required this.client, required this.db, required this.userRepository});
@@ -101,18 +102,17 @@ class StorageRepositoryImpl implements StorageRepository {
         amount: Value(stock.amount ?? 0),
         sync: Value(stock.sync));
 
-    db.insertStock(entity);
+    db.createStock(entity);
   }
 
   @override
-  Future<void> localDeleteStorage(Map<String, dynamic> storage) {
-    // TODO: implement localDeleteStorage
-    throw UnimplementedError();
+  Future<void> localDeleteStock(int id) async {
+    await db.deleteStock(id);
   }
 
   @override
   Future<List<StockData>> localFindAllStocks() async {
-    List<StockData> stockData = await db.getStocks();
+    List<StockData> stockData = await db.getAllStocks();
 
     return stockData;
   }
@@ -132,5 +132,11 @@ class StorageRepositoryImpl implements StorageRepository {
       }
     }
     return 0;
+  }
+  
+  @override
+  Future<void> localDeleteAllStocks() {
+    // TODO: implement localDeleteAllStocks
+    throw UnimplementedError();
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:drift/drift.dart';
@@ -9,6 +7,8 @@ import 'package:path/path.dart' as path;
 
 import '../entities/product_entity.dart';
 import '../entities/stock_entity.dart';
+import '../entities/group_entity.dart';
+import '../entities/permission_entity.dart';
 
 part 'database.g.dart';
 
@@ -21,38 +21,10 @@ LazyDatabase _openConnection() {
   });
 }
 
-@DriftDatabase(tables: [Stock, Product])
+@DriftDatabase(tables: [Group, Stock, Product, Permissions])
 class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
-
-  Future<List<StockData>> getStocks() async {
-    return await select(stock).get();
-  }
-
-  Future<List<StockData>> getNotSyncedStock() async {
-    return await (select(stock)..where((tbl) => tbl.sync.equals(0))).get();
-  }
-
-  Future<int> setStockToSynced(int id) async {
-    log("$id");
-
-    return (update(stock)
-          ..where(
-            (tbl) => tbl.id.equals(id),
-          ))
-        .write(
-      const StockCompanion(sync: Value(1)),
-    );
-  }
-
-  Future<int> insertStock(StockCompanion stockEntity) async {
-    return await into(stock).insert(stockEntity);
-  }
-
-  Future<void> deleteStocks() async {
-    await (delete(stock)..where((tbl) => tbl.sync.equals(1))).go();
-  }
 }

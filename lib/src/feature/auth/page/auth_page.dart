@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
-import 'package:mob_storage_app/src/feature/auth/auth_controller.dart';
+import 'package:mob_storage_app/src/feature/auth/controller/auth_controller.dart';
 
-import '../../core/ui/base_state/base_state.dart';
-import '../../core/ui/widgets/primary_button.dart';
-import 'auth_state.dart';
-import 'widgets/user_auth_form.dart';
+import '../../../core/ui/base_state/base_state.dart';
+import '../../../core/ui/widgets/primary_button.dart';
+import '../controller/auth_state.dart';
+import '../widgets/user_auth_form.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);

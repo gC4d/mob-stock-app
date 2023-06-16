@@ -1,20 +1,21 @@
 import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mob_storage_app/src/core/repositories/app/app_validations.dart';
+import 'package:mob_storage_app/src/core/repositories/user/user_repository.dart';
 import 'package:mob_storage_app/src/feature/validation/validation_state.dart';
 
 class ValidationController extends Cubit<ValidationState> {
-  final AppValidations _appValidations;
-  ValidationController(this._appValidations)
+  final UserRepository _userRepository;
+  ValidationController(this._userRepository)
       : super(const ValidationState.initial());
 
+  
   Future<void> userValidation() async {
-    emit(state.copyWith(status: ValidationStateStatus.loading));
+    log('initialize a user validation...');
     try {
-      await _appValidations.checkIfIsLogged()
-          ? emit(state.copyWith(status: ValidationStateStatus.userLogged))
-          : emit(state.copyWith(status: ValidationStateStatus.userLogged));
+      bool userIsLogged = await _userRepository.checkforUserIsLogged();
+      emit(state.copyWith(
+        isLogged: userIsLogged,
+      ));
     } catch (e) {
       emit(
         state.copyWith(
@@ -24,4 +25,11 @@ class ValidationController extends Cubit<ValidationState> {
       log('error in ValidationController.userValidation() method', error: e);
     }
   }
+  Future<void> groupValidation() async {
+    try {
+    } catch (e) {
+      
+    }
+  }
+
 }

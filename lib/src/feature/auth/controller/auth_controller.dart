@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:mob_storage_app/src/feature/auth/dto/auth_dto.dart';
 
-import '../../core/repositories/user/user_repository.dart';
-import '../auth/auth_state.dart';
+import '../../../core/repositories/user/user_repository.dart';
+import 'auth_state.dart';
 
 class AuthController extends Cubit<AuthState> {
   final UserRepository _userRepository;

@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_storage_app/src/core/ui/helpers/size_helper.dart';
 import 'package:mob_storage_app/src/core/ui/widgets/primary_button.dart';
-import 'package:mob_storage_app/src/feature/stock/controller/stock_controller.dart';
-
 import '../../../core/ui/base_state/base_state.dart';
 import '../../../core/ui/widgets/custom_input_TextField.dart';
-import '../controller/stock_state.dart';
+import '../stock_controller.dart';
+import '../stock_state.dart';
 import '../widgets/categories_stock_dropdown.dart';
 
 class AddStockPage extends StatefulWidget {

@@ -10,24 +10,19 @@ import './user_repository.dart';
 class UserRepositoryImpl implements UserRepository {
   late Box box;
   final RestClient client;
-  UserRepositoryImpl({required this.client}) {
-    init();
-  }
+  UserRepositoryImpl({required this.client});
 
-  @override
-  Future<void> init() async {
-    box = await Hive.openBox('UserBox');
-  }
-
+ 
   @override
   Future<bool> checkforUserIsLogged() async {
     box = await Hive.openBox('UserBox');
     var user = await box.get('User');
-    log("$user");
     if (user == null) {
-      log("Usuário não logado");
+      log("User state: User is not logged");
       return false;
     } else {
+      log("User state: User is logged");
+      log("User info: $user");
       return true;
     }
   }
@@ -50,11 +45,10 @@ class UserRepositoryImpl implements UserRepository {
     try {
       Response? user =
           await client.auth().get("/user/auth", data: authUserDto);
-          log("${user.data.runtimeType}");
       box = await Hive.openBox('UserBox');
       await box.put('User', user.data);
     } on DioError catch (e, s) {
-      log("", error:  e, stackTrace:  s);
+      log("Error in authUser method", error:  e, stackTrace:  s);
       throw AuthException(message: "Erro ao logar usuário");
     }
   }
@@ -71,9 +65,10 @@ class UserRepositoryImpl implements UserRepository {
       box = await Hive.openBox('UserBox');
       var user = await box.get('User');
       int id = user["id"];
-      log("tst: ${user["id"]}");
       return id;
-    } catch (e) {}
+    } catch (e) {
+      log("Error in getUserId method");
+    }
     return 0;
   }
   
@@ -83,9 +78,10 @@ class UserRepositoryImpl implements UserRepository {
       box = await Hive.openBox('UserBox');
       var user = await box.get('User');
       String name = user["name"];
-      log("tst: ${user["name"]}");
       return name;
-    } catch (e) {}
+    } catch (e) {
+      log("Error in getUserName method");
+    }
     return 'Usuario';
   }
 }

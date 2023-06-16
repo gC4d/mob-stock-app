@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names
+
+import 'package:flutter/material.dart' show BorderRadius, BorderSide, BuildContext, Icon, InputDecoration, Key, OutlineInputBorder, SizedBox, StatelessWidget, TextField, Theme, Widget;
 
 class CustomInputTextfield extends StatelessWidget {
   final Icon icon;
@@ -26,9 +28,9 @@ class CustomInputTextfield extends StatelessWidget {
         obscureText: obscureText,
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderSide: const BorderSide(
-              width: 5,
-              color: Colors.grey,
+            borderSide: BorderSide(
+              width: 100,
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
