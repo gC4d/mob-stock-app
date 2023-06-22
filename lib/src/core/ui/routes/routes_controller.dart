@@ -1,21 +1,28 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:mob_storage_app/src/core/ui/routes/routes_repository.dart';
 
-class RoutesController implements RoutesRepository {
+mixin RoutesController <T extends StatefulWidget> on State<T> implements RoutesRepository {
   @override
-  Future<void> back() {
+  Future<void> back(BuildContext context) async {
+    try {
+      Navigator.of(context).pop();
+    } catch (e) {
+       log(e.toString());
+      log(StackTrace.current.toString());
+    }
     
   }
 
   @override
-  Future<Map<String, dynamic>> backTo() {
-    // TODO: implement backTo
-    throw UnimplementedError();
+  Future<void> goTo(BuildContext context, String route,
+      [Map<String, dynamic>? arguments]) async {
+    try {
+      await Navigator.of(context).popAndPushNamed(route, arguments: arguments);
+    } catch (e) {
+      log(e.toString());
+      log(StackTrace.current.toString());
+    }
   }
-
-  @override
-  Future<Map<String, dynamic>> goTo() {
-    // TODO: implement goTo
-    throw UnimplementedError();
-  }
-
 }

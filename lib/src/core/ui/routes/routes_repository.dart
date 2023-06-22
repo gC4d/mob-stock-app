@@ -1,5 +1,6 @@
+import 'package:flutter/widgets.dart';
+
 abstract class RoutesRepository {
-  Future<Map<String, dynamic>> goTo();
-  Future<void> back();
-  Future<Map<String, dynamic>> backTo();
+  Future<void> goTo(BuildContext context, String route, [Map<String, dynamic>? arguments]);
+  Future<void> back(BuildContext context);
 }
