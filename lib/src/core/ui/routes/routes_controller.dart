@@ -3,16 +3,15 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mob_storage_app/src/core/ui/routes/routes_repository.dart';
 
-mixin RoutesController <T extends StatefulWidget> on State<T> implements RoutesRepository {
+class RoutesController implements RoutesRepository {
   @override
   Future<void> back(BuildContext context) async {
     try {
       Navigator.of(context).pop();
     } catch (e) {
-       log(e.toString());
+      log(e.toString());
       log(StackTrace.current.toString());
     }
-    
   }
 
   @override
@@ -25,4 +24,9 @@ mixin RoutesController <T extends StatefulWidget> on State<T> implements RoutesR
       log(StackTrace.current.toString());
     }
   }
+}
+
+extension RoutesExtensions on BuildContext {
+  void goTo(String route) => RoutesController().goTo(this, route);
+  void back() => RoutesController().back(this);
 }
