@@ -12,7 +12,9 @@ class ValidationRouter {
         providers: [
           Provider(
             create: (context) => ValidationController(
-              context.read()
+              context.read(),
+              context.read(),
+              context.read(),
             ),
           )
         ],
