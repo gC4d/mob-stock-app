@@ -11,8 +11,7 @@ extension GroupStateStatusMatch on GroupStateStatus {
       {required T Function() initial,
       required T Function() loading,
       required T Function() success,
-      required T Function() error,
-      required T Function() notLogged}) {
+      required T Function() error}) {
     final v = this;
     if (v == GroupStateStatus.initial) {
       return initial();
@@ -30,10 +29,6 @@ extension GroupStateStatusMatch on GroupStateStatus {
       return error();
     }
 
-    if (v == GroupStateStatus.notLogged) {
-      return notLogged();
-    }
-
     throw Exception('GroupStateStatus.match failed, found no match for: $this');
   }
 
@@ -42,8 +37,7 @@ extension GroupStateStatusMatch on GroupStateStatus {
       T Function()? initial,
       T Function()? loading,
       T Function()? success,
-      T Function()? error,
-      T Function()? notLogged}) {
+      T Function()? error}) {
     final v = this;
     if (v == GroupStateStatus.initial && initial != null) {
       return initial();
@@ -59,10 +53,6 @@ extension GroupStateStatusMatch on GroupStateStatus {
 
     if (v == GroupStateStatus.error && error != null) {
       return error();
-    }
-
-    if (v == GroupStateStatus.notLogged && notLogged != null) {
-      return notLogged();
     }
 
     return any();

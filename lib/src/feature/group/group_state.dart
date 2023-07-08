@@ -11,7 +11,6 @@ enum GroupStateStatus {
   loading,
   success,
   error,
-  notLogged,
 }
 
 class GroupState extends Equatable {
@@ -37,7 +36,7 @@ class GroupState extends Equatable {
 
   GroupState copyWith({
     GroupStateStatus? status,
-    List<GroupData>? stocks,
+    List<GroupData>? groups,
     String? errorMessage,
   }) {
     return GroupState(
